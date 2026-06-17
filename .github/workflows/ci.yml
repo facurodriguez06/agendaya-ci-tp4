@@ -1,0 +1,36 @@
+name: CI Pipeline TP4 AgendaYA
+
+# Triggers: Se ejecuta cuando alguien hace push o abre un Pull Request hacia main
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Checkout del código
+    - name: Checkout del repositorio
+      uses: actions/checkout@v4
+
+    # 2. Configurar Node.js
+    - name: Configurar Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+
+    # 3. Instalar dependencias
+    - name: Instalar dependencias
+      run: npm ci
+
+    # 4. Ejecutar Pruebas Unitarias
+    - name: Ejecutar Tests (Jest)
+      run: npm run test
+
+    # 5. Build del proyecto Next.js
+    - name: Compilar el proyecto (Build)
+      run: npm run build
