@@ -25,7 +25,7 @@ jobs:
 
     # 3. Instalar dependencias
     - name: Instalar dependencias
-      run: npm ci
+      run: npm install
 
     # 4. Ejecutar Pruebas Unitarias
     - name: Ejecutar Tests (Jest)
